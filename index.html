@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .bmi-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .bmiimg img {
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        button {
+            background: #63ff85;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #72ff4b;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result h2 {
+            font-size: 1.8rem;
+            color: #ffc163;
+        }
+
+        .result p {
+            font-size: 1rem;
+            color: #b41010;
+        }
+    </style>
+</head>
+<body>
+    <h1>BMI Calculator</h1>
+    <div class="bmi-container">
+        <div class="bmiimg">
+            <img src="./assets/Wavy_Lst-05_Single-04.png" alt="Fitness Illustration" width="300px">
+        </div>
+
+        <div>
+            <div class="input-section">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" placeholder="Enter weight" required>
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" placeholder="Enter height" required>
+            </div>
+
+            <button onclick="calculateBMI()">Calculate BMI</button>
+
+            <div class="result">
+                <h2>Your BMI: <span id="bmi-result">0.00</span></h2>
+                <p id="bmi-category"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const weight = document.getElementById("weight").value;
+            const height = document.getElementById("height").value / 100; 
+            const bmi = (weight / (height * height)).toFixed(2);
+
+            document.getElementById("bmi-result").textContent = bmi;
+
+            let category = "";
+            if (bmi < 18.5) category = "Underweight";
+            else if (bmi >= 18.5 && bmi <= 24.9) category = "Normal weight";
+            else if (bmi >= 25 && bmi <= 29.9) category = "Overweight";
+            else category = "Obesity";
+
+            document.getElementById("bmi-category").textContent = `Category: ${category}`;
+        }
+    </script>
+</body>
+</html>
